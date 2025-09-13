@@ -17,60 +17,42 @@
 
 #############################################
 
-
-# FUNÇÕES:
-
-def geometria_plantio():
-        geometria_plantio = input("""Selecione abaixo o formato geométrico da área de plantio:
-                1- Retângulo;
-                2- Quadrado;
-                3- Círculo;
-                4- Triângulo;
-                
-                """).strip().lower()
-        
-        match geometria_plantio:
-                case "1" | "um" | "retangulo" | "retângulo":
-                        pass
-                case "2" | "dois" | "quadrado":
-                        pass
-                case "3" | "tres" | "três" | "circulo" | "círculo":
-                        pass
-                case "4" | "quatro" | "triangulo" | "triângulo":
-                        pass
-
-def area_plantio():      
-        area_plantio = input("""Digite o número de acordo com o desejado: 
-                1- Informar área em metros quadrados;
-                2- informar área em hectares;
-                
-                """).strip().lower()
-        
-
-
-
 # MENU:
+from main import(
 
-print("""
-              ＦＡＲＭ　ＴＥＣＨ
-""")
+        criar_parcela,
+        mostrar_parcela,
+        atualizar_parcela,
+        deletar_parcela
 
-option = input("""Bem-vindo à FarmTech! Selecione a opção desejada:
-        
-        1- Inserir dados
-        2- Mostrar dados
-        3- Atualizar dados
-        4- Deletar dados
-        5- Sair""")
+)
 
-match option:
-        case "1" | "um" | "inserir":
-                pass
-        case "2" | "dois" | "mostrar dados":
-                pass
-        case "3" | "três" | "tres" | "atualizar":
-                pass
-        case "4" | "quatro" | "deletar" | "excluir":
-                pass
-        case "5" | "cinco" | "sair":
-                pass
+
+while True:
+        print("""
+                ＦＡＲＭ　ＴＥＣＨ
+        """)
+
+        option = input("""\nBem-vindo(a) à Farm Tech! Selecione a opção desejada:              
+1- Inserir dados
+2- Mostrar dados
+3- Atualizar dados
+4- Deletar dados
+5- Sair
+                 
+Resposta: """)
+
+
+# FALTA: chamar as funções
+        match option:
+                case "1" | "um" | "inserir":
+                        criar_parcela()
+                case "2" | "dois" | "mostrar dados":
+                        mostrar_parcela()
+                case "3" | "três" | "tres" | "atualizar":
+                        atualizar_parcela()
+                case "4" | "quatro" | "deletar" | "excluir":
+                        deletar_parcela()
+                case "5" | "cinco" | "sair":
+                        print("\nEncerrando o programa!")
+                        break
