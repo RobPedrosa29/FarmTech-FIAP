@@ -89,6 +89,18 @@ def deletar_dados():
     if not registros:
         print("\n[Atenção!]Nenhum registro para deletar!\n")
         return
+    
+    exibir_dados()
+    pos = input("\nDigite o número do registro que deseja deletar: ")
+    if pos.isdigit():
+        pos = int(pos)
+        if 1 <= pos <= len(registros):
+            removido = registros.pop(pos - 1)
+            print(f"\n[x] Registro {pos} deletado com sucesso: {removido}\n")
+        else:
+            print("[ATENÇÃO!] Posição inválida!")
+    else:
+        print("[ATENÇÃO!]  Entrada inválida, digite um número inteiro.")
 
 
 def menu(): # Menu de escolhas para ação do usuário
