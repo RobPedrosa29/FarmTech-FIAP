@@ -134,5 +134,3 @@ def menu(): # Menu de escolhas para ação do usuário
 
 
 menu() # Chama o menu ao executar o programa
-
-##
