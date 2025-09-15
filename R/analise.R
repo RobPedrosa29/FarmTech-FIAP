@@ -1,15 +1,26 @@
-library(readr)
 
-# Ler os arquivos CSV exportados do Python
-cana <- read_csv("R/dados_cana.csv", show_col_types = FALSE)
-laranja <- read_csv("R/dados_laranja.csv", show_col_types = FALSE)
+# Dados da Cana-de-açucar
+cana <- read.csv("R/dados_cana.csv")   # Lê o CSV exportado do Python
+print(cana)                             # Mostra os dados lidos
 
-cat("\n===== ANÁLISE DA CANA-DE-AÇÚCAR =====\n")
-print(cana)
-cat("\nMédia da área (m²): ", mean(cana$Área))
-cat("\nDesvio padrão da quantidade de insumo (kg): ", sd(cana$`Quantidade de Insumo`))
+# Calcular média da área
+media_area <- mean(cana$Área)
+print(paste("Média da Área:", media_area))
 
-cat("\n\n===== ANÁLISE DA LARANJA =====\n")
-print(laranja)
-cat("\nMédia da área (m²): ", mean(laranja$area_m2))
-cat("\nDesvio padrão dos litros de herbicida: ", sd(laranja$litros))
+# Calcular desvio padrão da área
+desvio_area <- sd(cana$Área)
+print(paste("Desvio padrão da Área:", desvio_area))
+
+
+
+# Dados da Laranja
+laranja <- read.csv("R/dados_laranja.csv")   # Lê o CSV exportado do Python
+print(laranja)                               # Mostra os dados lidos
+
+# Calcular média da área em m²
+media_area_laranja <- mean(laranja$area_m2)
+print(paste("Média da Área (Laranja):", media_area_laranja))
+
+# Calcular desvio padrão da área em m²
+desvio_area_laranja <- sd(laranja$area_m2)
+print(paste("Desvio padrão da Área (Laranja):", desvio_area_laranja))

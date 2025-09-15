@@ -3,21 +3,27 @@ from main import(
     selecionar_cultura
 )
 
-from plantio_laranja import (inserir_dados)
-
 # VETOR:
-parcela_cana = {}
+parcelas_cana = []
 
 ########## PARCELAS E SELECIONAR CULTURA ##########
 
 # -----Criar parcela-----
 def criar_parcela():
-    global parcela_cana
+    global parcelas_cana
+    if len(parcelas_cana) >= 5:
+        print("[Atenção!] Número máximo de parcelas atingido.")
+        return
+    
+    numero = len(parcelas_cana) + 1 #add número do ID, exemplo P1, P2, P3
+    nome_parcela = f"[P{numero}]"   #ID da parcela (P + número)
+
     cultura = "Cana-de-açucar"
     valor, unidade = area_cana_acucar()
     quantidade = insumo(valor, unidade)
 
-    parcela_cana = {
+    nova_parcela = {
+        "ID": nome_parcela,
         "Cultura": cultura,
         "Área": valor,
         "Unidade": unidade,
@@ -25,27 +31,38 @@ def criar_parcela():
         "Quantidade de Insumo": quantidade
     }
 
+    parcelas_cana.append(nova_parcela)
     print("\nParcela cadastrada com sucesso!")
 
 # -----Mostrar parcela-----
 def mostrar_parcela():
-    if parcela_cana:
-        print("\n  [Dados da Parcela]")
-        for chave, valor in parcela_cana.items():
-            if chave == "Área":
-                print(f"{chave}: {valor:,.2f}")
-            elif chave == "Quantidade de Insumo":
-                print(f"{chave}: {valor:,.2f} kg")
-            else:
-                print(f"{chave}: {valor}")
+    if parcelas_cana:
+        for parcela in parcelas_cana:
+            print(f"\n{parcela['ID']}")
+            for chave, valor in parcela.items():
+                if chave == "Área":
+                    print(f"{chave}: {valor:,.2f}")
+                elif chave == "Quantidade de Insumo":
+                    print(f"{chave}: {valor:,.2f} Kg")
+                elif chave != "ID":
+                    print(f"{chave}: {valor}")
+                    
     else:
         print("\nNenhuma parcela cadastrada.")
 
 
 # -----Atualizar parcela-----
 def atualizar_parcela():
-    if not parcela_cana:
-        print("\nNenhum dado para atualizar.")
+    nome = input("\nDigite o ID da parcela: ").strip()
+    
+    parcela = None
+    for p in parcelas_cana:
+        if p['ID'] == nome:
+            parcela = p
+            break
+
+    if parcela is None:
+        print("\nParcela não encontrada.")
         return
     
     escolha = input("""\nO que deseja atualizar?
@@ -58,29 +75,36 @@ def atualizar_parcela():
     match escolha:
         case "1" | "cultura":
             cultura = selecionar_cultura()
-            parcela_cana["Cultura"] = cultura
+            parcela["Cultura"] = cultura
 
         case "2" | "área" | "area":
             valor, unidade = area_cana_acucar()
             quantidade = insumo(valor, unidade)
-            parcela_cana["Área"] = valor
-            parcela_cana["Unidade"] = unidade
-            parcela_cana["Quantidade de Insumo"] = quantidade
+            parcelas_cana["Área"] = valor
+            parcelas_cana["Unidade"] = unidade
+            parcelas_cana["Quantidade de Insumo"] = quantidade
         
         case "3" | "insumo":
             quantidade = ler_float("\nDigite a quantidade de fertilizante:\nResposta: ")
-            parcela_cana["Quantidade de Insumo"] = quantidade
+            parcelas_cana["Quantidade de Insumo"] = quantidade
+
+        case _:
+            print("\nOpção inválida.")
+
     print("\nParcela atualizada com sucesso!")
 
 # -----Deletar parcela-----
 def deletar_parcela():
-    global parcela_cana
-    if not parcela_cana:
-        print("\nNenhuma parcela para deletar")
-        return
-    parcela_cana = {}
-    print("\nParcela removida com sucesso!")
-    
+    nome = input("Digite o ID da parcela: ").strip()
+    parcela_encontrada = False
+    for parcela in parcelas_cana:
+        if parcela['ID'] == nome:
+            parcelas_cana.remove(parcela)
+            parcela_encontrada = True
+            print(f"\nParcela removida com sucesso!")
+            break
+    if not parcela_encontrada:
+        print("\nParcela não encontrada")
 
 
 
