@@ -18,6 +18,11 @@ from plantio_laranja import (
         deletar_dados
 )
 
+from export import exportar_dados
+
+
+
+
 
 ########## MENU ##########
 distancia_titulo = 50
@@ -35,9 +40,9 @@ while True:
 2- Mostrar dados
 3- Atualizar dados
 4- Deletar dados
-                      
-5- Selecionar outra cultura
-6- Sair
+5- Exportar dados para análise           
+6- Selecionar outra cultura
+7- Sair
                                           
 ---Resposta: """)
         
@@ -51,9 +56,11 @@ while True:
                                 atualizar_parcela()
                         case "4" | "quatro" | "deletar" | "excluir":
                                 deletar_parcela()
-                        case "5" | "cinco" | "selecionar cultura" | "outra cultura":
+                        case "5" | "exportar":
+                                exportar_dados()
+                        case "6" | "seis" | "selecionar cultura" | "outra cultura":
                                 cultura = selecionar_cultura()
-                        case "6" | "seis" | "sair":
+                        case "7" | "sete" | "sair":
                                 print("\nEncerrando o programa!")
                                 break
                         case _:
@@ -69,9 +76,11 @@ while True:
                                 atualizar_dados()
                         case "4" | "quatro" | "deletar" | "excluir":
                                 deletar_dados()
-                        case "5" | "cinco" | "selecionar cultura" | "outra cultura":
+                        case "5" | "exportar":
+                                exportar_dados()
+                        case "6" | "seis" | "selecionar cultura" | "outra cultura":
                                 cultura = selecionar_cultura()
-                        case "6" | "seis" | "sair":
+                        case "7" | "sete" | "sair":
                                 print("\nEncerrando o programa!")
                                 break
                         case _:
