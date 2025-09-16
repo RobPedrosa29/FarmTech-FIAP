@@ -106,6 +106,11 @@ def deletar_parcela():
             break
     if not parcela_encontrada:
         print("\nParcela não encontrada")
+        return
+
+    # -----Atualizar IDs das parcelas restantes-----
+    for idx, parcela in enumerate(parcelas_cana, start=1):
+        parcela['ID'] = f"P{idx}"
 
 
 
