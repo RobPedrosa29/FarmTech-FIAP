@@ -71,27 +71,23 @@ def atualizar_parcela():
         return
     
     escolha = input("""\nO que deseja atualizar?
-1- Cultura
-2- Área
-3- Insumo
+1- Área
+2- Insumo
                     
 ---Resposta: """).strip().lower()
     
     match escolha:
-        case "1" | "cultura":
-            cultura = selecionar_cultura()
-            parcela["Cultura"] = cultura
-
-        case "2" | "área" | "area":
+        case "1" | "área" | "area":
             valor, unidade = area_cana_acucar()
             quantidade = insumo(valor, unidade)
-            parcelas_cana["Área"] = valor
-            parcelas_cana["Unidade"] = unidade
-            parcelas_cana["Quantidade de Insumo"] = quantidade
-        
-        case "3" | "insumo":
+            # Atualiza o dicionário da parcela
+            parcela["Área"] = valor
+            parcela["Unidade"] = unidade
+            parcela["Quantidade de Insumo"] = quantidade
+
+        case "2" | "insumo":
             quantidade = ler_float("\nDigite a quantidade de fertilizante:\nResposta: ")
-            parcelas_cana["Quantidade de Insumo"] = quantidade
+            parcela["Quantidade de Insumo"] = quantidade
 
         case _:
             print("\nOpção inválida.")
