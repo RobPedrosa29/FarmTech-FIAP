@@ -1,13 +1,12 @@
-# ---------------------------------------
-# Script de análise de CSVs: média e desvio padrão
-# ---------------------------------------
+# ================================================ #
+# Script de análise de CSVs: média e desvio padrão #
+# ================================================ #
+
 
 # Defina o caminho absoluto da pasta R (onde estão os CSVs)
 caminho_r <- "e:/Projects/FarmTech/R"
 
-# -------------------------------
-# Função para ler CSV e calcular estatísticas
-# -------------------------------
+# -----Ler CSV-----
 analisar_csv <- function(caminho_arquivo) {
   if (!file.exists(caminho_arquivo)) {
     cat(paste("Arquivo", caminho_arquivo, "não encontrado!\n"))
@@ -17,7 +16,7 @@ analisar_csv <- function(caminho_arquivo) {
   dados <- read.csv(caminho_arquivo, stringsAsFactors = FALSE)
   cat(paste("\n--- Analisando", basename(caminho_arquivo), "---\n"))
   
-  # Seleciona apenas colunas numéricas
+  # -----Seleciona colunas numéricas-----
   colunas_numericas <- sapply(dados, is.numeric)
   
   if (sum(colunas_numericas) == 0) {
@@ -34,8 +33,6 @@ analisar_csv <- function(caminho_arquivo) {
   }
 }
 
-# -------------------------------
-# Executar análise nos dois CSVs
-# -------------------------------
+# -----Análise dos dois conjunto de dados-----
 analisar_csv(file.path(caminho_r, "dados_cana.csv"))
 analisar_csv(file.path(caminho_r, "dados_laranja.csv"))

@@ -1,3 +1,8 @@
+# ================================== #
+# Code da cultura 1 - Cana-de-açucar #
+# ================================== #
+
+
 from main import(
     ler_float,
     selecionar_cultura
@@ -6,7 +11,7 @@ from main import(
 # VETOR:
 parcelas_cana = []
 
-########## PARCELAS E SELECIONAR CULTURA ##########
+########## PARCELAS E SELEÇÃO DE CULTURA ##########
 
 # -----Criar parcela-----
 def criar_parcela():
@@ -16,7 +21,7 @@ def criar_parcela():
         return
     
     numero = len(parcelas_cana) + 1 #add número do ID, exemplo P1, P2, P3
-    nome_parcela = f"[P{numero}]"   #ID da parcela (P + número)
+    nome_parcela = f"P{numero}"   #ID da parcela (P + número)
 
     cultura = "Cana-de-açucar"
     valor, unidade = area_cana_acucar()
@@ -108,38 +113,40 @@ def deletar_parcela():
 
 
 
-
-
 ########## ÁREA DE CANA E CÁLCULOS ##########
 
 # -----Área da cana-----
 def area_cana_acucar():
     print("\n[Atenção!] Para um cálculo correto, evite valores com ',' (exemplo: 1,800) ou '.' (exemplo: 1.800), podendo ser valores inferiores a um (exemplo: 0,3)")
-    area = input("""\nSelecione entre:              
+    
+    while True:
+        area = input("""\nSelecione entre:              
 1- Possuo o valor da área
 2- Não possuo o valor da área
         
 ---Resposta: """).strip().lower()
-    
-    match area:
-        case "1" | "um" | "ja possuo":
-            while  True:
-                unidade = input("""\nSelecione a unidade:                             
+        
+        match area:
+            case "1" | "um" | "ja possuo":
+                while True:
+                    unidade = input("""\nSelecione a unidade:                             
 1- Metro quadrado
 2- Hectare
-                
+                        
 ---Resposta: """).strip().lower()
-                if unidade in ("1", "metro quadrado", "m²"):
-                    valor = ler_float("\nDigite o valor do m²: ")
-                    return valor, "m²"
-                elif unidade in ("2", "hectares", "hectare", "ha"):
-                    valor = ler_float("\nDigite o valor do hectare: ")
-                    return valor, "ha"
-                else:
-                    print("\nOpção inválida, tente novamente!")
-        case "2" | "dois" | "não possuo" | "nao possuo":
-            valor = calculo_area_cana()
-            return valor, "m²"
+                    if unidade in ("1", "metro quadrado", "m²"):
+                        valor = ler_float("\nDigite o valor do m²: ")
+                        return valor, "m²"
+                    elif unidade in ("2", "hectares", "hectare", "ha"):
+                        valor = ler_float("\nDigite o valor do hectare: ")
+                        return valor, "ha"
+                    else:
+                        print("\nOpção inválida, tente novamente!")
+            case "2" | "dois" | "não possuo" | "nao possuo":
+                valor = calculo_area_cana()
+                return valor, "m²"
+            case _:
+                print("\nOpção inválida, tente novamente!")
 
 # -----Cálculo área da cana-----
 def calculo_area_cana():

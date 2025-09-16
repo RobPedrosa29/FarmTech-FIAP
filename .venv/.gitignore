@@ -1,0 +1,40 @@
+########## PYTHON ##########
+
+# -----Ambiente virtual-----
+.venv/
+
+# -----Arquivos compilados-----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# -----Arquivos de configuração do editor-----
+.vscode/
+*.idea/
+
+
+
+########## VARIÁVEIS DE AMBIENTE ##########
+.env
+
+
+
+########## R ##########
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+
+
+########## ARQUIVOS TEMPORÁRIOS ##########
+*.log
+*.tmp
+*.swp
+
+
+
+########## OUTROS ##########
+.DS_Store
+Thumbs.db

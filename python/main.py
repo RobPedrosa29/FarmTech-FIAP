@@ -1,3 +1,8 @@
+# ============== #
+# Funções gerais #
+# ============== #
+
+# -----Transforma o número mostrando as casas decimais-----
 def ler_float(prompt):
     while True:
         entrada = input(prompt).strip()

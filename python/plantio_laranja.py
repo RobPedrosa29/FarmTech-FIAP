@@ -1,3 +1,7 @@
+# =========================== #
+# Code da cultura 2 - Laranja #
+# =========================== #
+
 
 registros = [] # vetor/lista para armazenar até 5 registros de entrada do usuario
 

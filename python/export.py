@@ -1,17 +1,23 @@
+# ===================================== #
+# Exportação de dados para arquivos CSV #
+# ===================================== #
+
 import csv
 import os
 from plantio_cana import parcelas_cana
 from plantio_laranja import registros
 
-# Caminho da raiz do projeto (um nível acima de onde está este arquivo)
+# -----Caminho da raiz do projeto (um nível acima de onde está este arquivo)-----
 caminho_raiz = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Pasta R dentro da raiz do projeto
+# -----Pasta R dentro da raiz do projeto-----
 caminho_r = os.path.join(caminho_raiz, "R")
 os.makedirs(caminho_r, exist_ok=True)
 
 def exportar_dados():
-    # Exportar parcelas de cana
+    exportou_algum = False  # flag para saber se exportou algo
+
+    # -----Exportar parcelas de cana-----
     if parcelas_cana:
         caminho_arquivo_cana = os.path.join(caminho_r, "dados_cana.csv")
         with open(caminho_arquivo_cana, "w", newline="", encoding="utf-8") as f:
@@ -20,8 +26,9 @@ def exportar_dados():
             writer.writeheader()
             writer.writerows(parcelas_cana)
         print(f"[OK] Dados da cana exportados para {caminho_arquivo_cana}")
+        exportou_algum = True
 
-    # Exportar registros de laranja
+    # -----Exportar registros de laranja-----
     if registros:
         caminho_arquivo_laranja = os.path.join(caminho_r, "dados_laranja.csv")
         with open(caminho_arquivo_laranja, "w", newline="", encoding="utf-8") as f:
@@ -30,3 +37,8 @@ def exportar_dados():
             writer.writeheader()
             writer.writerows(registros)
         print(f"[OK] Dados da laranja exportados para {caminho_arquivo_laranja}")
+        exportou_algum = True
+
+    # -----Caso não tenha exportado nada-----
+    if not exportou_algum:
+        print("\n[Atenção!] Nenhum dado encontrado para exportação. Primeiro insira os dados.")
