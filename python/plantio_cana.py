@@ -171,7 +171,7 @@ def ha_em_metroq(ha):
 
 # -----Cálculo de insumo-----
 def insumo(valor, unidade):
-    print(f"\nAtenção: Para o cálculo de insumo da Cana-de-açucar será utilizada uma dosagem de 500 kg do fertilizante NPK 20-05-20 por hectare.\nRealizando cálculo...")
+    print(f"\n[Atenção] Para o cálculo de insumo da Cana-de-açucar será utilizada uma dosagem de 500 kg do fertilizante NPK 20-05-20 por hectare.\nRealizando cálculo...")
     
     if unidade == "m²":
         area_em_ha = metroq_em_ha(valor)
