@@ -14,12 +14,6 @@ __pycache__/
 *.idea/
 
 
-
-########## VARIÁVEIS DE AMBIENTE ##########
-.env
-
-
-
 ########## R ##########
 .Rhistory
 .RData

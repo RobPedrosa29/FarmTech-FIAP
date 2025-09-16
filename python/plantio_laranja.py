@@ -25,14 +25,25 @@ def calcular_herbicida(largura_terreno: float, comprimento_lavoura: float, dose_
 
 
 def inserir_dados():
-    if len(registros) >= 5: # maximo de 5 para armazenamento na lista/vetor
+    if len(registros) >= 5:
         print("\n[Atenção!] Limite de 5 registros atingido! Delete algum registro antes de adicionar um novo.\n")
         return
 
-    largura = float(input("Informe a largura do terreno (m): "))
-    comprimento = float(input("Informe o comprimento do terreno (m): "))
-    espacamento = float(input("Informe o espaçamento entre linhas (m): "))
-    dose = float(input("Informe a dose de herbicida (L/ha): "))
+    while True:
+        try:
+            largura = float(input("Informe a largura do terreno (m): "))
+            comprimento = float(input("Informe o comprimento do terreno (m): "))
+            espacamento = float(input("Informe o espaçamento entre linhas (m): "))
+            dose = float(input("Informe a dose de herbicida (L/ha): "))
+
+            # Validação de valores positivos
+            if largura <= 0 or comprimento <= 0 or espacamento <= 0 or dose <= 0:
+                print("\n[Erro!] Todos os valores devem ser maiores que zero. Tente novamente.\n")
+                continue
+
+            break
+        except ValueError:
+            print("\n[Erro!] Digite apenas números válidos.\nTente novamente.\n")
 
     ruas = calcular_ruas(largura, espacamento)
     comprimento_total = calcular_comprimento_ruas(ruas, comprimento)
@@ -51,9 +62,8 @@ def inserir_dados():
         "litros": litros
     }
 
-    registros.append(registro) 
+    registros.append(registro)
     print("\n[OK] Registro adicionado com sucesso!\n")
-
 
 def exibir_dados():
     if not registros: # Se lista vazia, alertar usuario. Senão, informar sucesso
@@ -79,30 +89,37 @@ def atualizar_dados():
         return
 
     exibir_dados()
-    indice = int(input("\nDigite o número do registro que deseja atualizar: ")) - 1
-
-    if 0 <= indice< len(registros):
-        registros.pop(indice)
-        print("\n[@] Insira os novos dados para este registro:\n")
-        inserir_dados()
-    else:
-        print("\n[Atenção!] Registro inválido!\n")
+    while True:
+        pos = input("\nDigite o número do registro que deseja atualizar: ")
+        if pos.isdigit():
+            indice = int(pos) - 1
+            if 0 <= indice < len(registros):
+                registros.pop(indice)
+                print("\n[@] Insira os novos dados para este registro:\n")
+                inserir_dados()
+                break
+            else:
+                print("[Erro!] Número de registro inválido. Tente novamente.")
+        else:
+            print("[Erro!] Entrada inválida, digite um número inteiro.")
 
 
 def deletar_dados():
     if not registros:
         print("\n[Atenção!] Nenhum registro para deletar!\n")
         return
-    
+
     exibir_dados()
-    pos = input("\nDigite o número do registro que deseja deletar: ")
-    if pos.isdigit():
-        pos = int(pos)
-        if 1 <= pos <= len(registros):
-            removido = registros.pop(pos - 1)
-            print(f"\n[x] Registro {pos} deletado com sucesso: {removido}\n")
+    while True:
+        pos = input("\nDigite o número do registro que deseja deletar: ")
+        if pos.isdigit():
+            pos = int(pos)
+            if 1 <= pos <= len(registros):
+                removido = registros.pop(pos - 1)
+                print(f"\n[x] Registro {pos} deletado com sucesso: {removido}\n")
+                break
+            else:
+                print("[Erro!] Posição inválida, tente novamente.")
         else:
-            print("[ATENÇÃO!] Posição inválida!")
-    else:
-        print("[ATENÇÃO!] Entrada inválida, digite um número inteiro.")
+            print("[Erro!] Entrada inválida, digite um número inteiro.")
 
