@@ -1,26 +1,41 @@
+# ---------------------------------------
+# Script de análise de CSVs: média e desvio padrão
+# ---------------------------------------
 
-# Dados da Cana-de-açucar
-cana <- read.csv("R/dados_cana.csv")   # Lê o CSV exportado do Python
-print(cana)                             # Mostra os dados lidos
+# Defina o caminho absoluto da pasta R (onde estão os CSVs)
+caminho_r <- "e:/Projects/FarmTech/R"
 
-# Calcular média da área
-media_area <- mean(cana$Área)
-print(paste("Média da Área:", media_area))
+# -------------------------------
+# Função para ler CSV e calcular estatísticas
+# -------------------------------
+analisar_csv <- function(caminho_arquivo) {
+  if (!file.exists(caminho_arquivo)) {
+    cat(paste("Arquivo", caminho_arquivo, "não encontrado!\n"))
+    return(NULL)
+  }
+  
+  dados <- read.csv(caminho_arquivo, stringsAsFactors = FALSE)
+  cat(paste("\n--- Analisando", basename(caminho_arquivo), "---\n"))
+  
+  # Seleciona apenas colunas numéricas
+  colunas_numericas <- sapply(dados, is.numeric)
+  
+  if (sum(colunas_numericas) == 0) {
+    cat("Nenhuma coluna numérica encontrada.\n")
+    return(NULL)
+  }
+  
+  for (coluna in names(dados)[colunas_numericas]) {
+    media <- mean(dados[[coluna]], na.rm = TRUE)
+    desvio <- sd(dados[[coluna]], na.rm = TRUE)
+    cat(paste0("Coluna: ", coluna, "\n"))
+    cat(paste0("  Média: ", round(media, 2), "\n"))
+    cat(paste0("  Desvio Padrão: ", round(desvio, 2), "\n\n"))
+  }
+}
 
-# Calcular desvio padrão da área
-desvio_area <- sd(cana$Área)
-print(paste("Desvio padrão da Área:", desvio_area))
-
-
-
-# Dados da Laranja
-laranja <- read.csv("R/dados_laranja.csv")   # Lê o CSV exportado do Python
-print(laranja)                               # Mostra os dados lidos
-
-# Calcular média da área em m²
-media_area_laranja <- mean(laranja$area_m2)
-print(paste("Média da Área (Laranja):", media_area_laranja))
-
-# Calcular desvio padrão da área em m²
-desvio_area_laranja <- sd(laranja$area_m2)
-print(paste("Desvio padrão da Área (Laranja):", desvio_area_laranja))
+# -------------------------------
+# Executar análise nos dois CSVs
+# -------------------------------
+analisar_csv(file.path(caminho_r, "dados_cana.csv"))
+analisar_csv(file.path(caminho_r, "dados_laranja.csv"))
