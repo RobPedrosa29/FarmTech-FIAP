@@ -76,23 +76,27 @@ def atualizar_parcela():
                     
 ---Resposta: """).strip().lower()
     
+    atualizado = False  # flag para controlar se houve atualização
+
     match escolha:
         case "1" | "área" | "area":
             valor, unidade = area_cana_acucar()
             quantidade = insumo(valor, unidade)
-            # Atualiza o dicionário da parcela
             parcela["Área"] = valor
             parcela["Unidade"] = unidade
             parcela["Quantidade de Insumo"] = quantidade
+            atualizado = True
 
         case "2" | "insumo":
             quantidade = ler_float("\nDigite a quantidade de fertilizante:\nResposta: ")
             parcela["Quantidade de Insumo"] = quantidade
+            atualizado = True
 
         case _:
             print("\nOpção inválida.")
 
-    print("\nParcela atualizada com sucesso!")
+    if atualizado:
+        print("\nParcela atualizada com sucesso!")
 
 # -----Deletar parcela-----
 def deletar_parcela():
